@@ -1,6 +1,0 @@
-1. [Слайсы](./docs/platform/slices.md)
-2. [Мапы](./docs/platform/maps.md)
-3. [Интерфейсы. Общее](./docs/platform/common.md)
-4. [Интерфейсы. Nil, Not nil](./docs/platform/nil_not_nil.md)
-5. [Интерфейсы. Type assertion](./docs/platform/assertion.md)
-6. [Строки](./docs/platform//strings.md)
