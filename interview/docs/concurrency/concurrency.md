@@ -102,12 +102,10 @@
                     }()
                 }
                 for range 5 {
-                    val := <-ch
-                    fmt.Println(val) // чтение
+                    val := <-ch // чтение
+                    fmt.Println(val) 
                 }
             }
         </code></pre>
     </li>
 </ul>
-
-<h3>Задачи:</h3>
