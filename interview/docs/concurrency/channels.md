@@ -42,6 +42,4 @@
             </tbody>
         </table>
     </li>
-    <li>
-    </li>
 </ul>

@@ -37,4 +37,6 @@ func main() {
 	fmt.Println(time.Since(now))
 }
 
-func processParallel(in <-chan int, out chan<- int, numWorkers int) {}
+func processParallel(in <-chan int, out chan<- int, numWorkers int) {
+
+}
