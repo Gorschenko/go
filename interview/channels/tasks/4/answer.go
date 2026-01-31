@@ -7,8 +7,8 @@ import (
 )
 
 /*
-	Использовать оператор select и не выйти из следующим образом:
-	по чтению из канала, по закрытию канала, по контексту,
+	Использовать оператор select и не выйти разными способами (6 шт.).
+	Способы: по чтению из канала, по закрытию канала, по контексту,
 	по таймеру, по time.After, по дефолту
 */
 
@@ -34,7 +34,7 @@ func main() {
 		fmt.Println("From after timer")
 	case <-ctx.Done():
 		fmt.Println("From context")
-		// default:
-		// 	fmt.Println("From default")
+	default:
+		fmt.Println("From default")
 	}
 }
