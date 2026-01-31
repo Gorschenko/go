@@ -7,11 +7,20 @@
   - https://github.com/joho/godotenv
   - go get github.com/joho/godotenv
 
+- Конфигурация
+  - https://github.com/spf13/viper
+  - go get github.com/spf13/viper
+
 - Hot reloader
   - https://github.com/air-verse/air
   - go install github.com/air-verse/air@latest - глобально
   - go get -tool github.com/air-verse/air@latest - локально
   - Создать минимальный конфиг в корне проекта.
+
+- DI
+  - https://github.com/google/wire
+  - https://github.com/uber-go/fx
+  - go get go.uber.org/fx@v1
 
 - Выбор ORM:
   - https://github.com/d-tsuji/awesome-go-orms
