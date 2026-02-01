@@ -7,16 +7,16 @@ import "fmt"
 */
 
 func main() {
-	ch := make(chan int)
+	ch := make(chan int, 3)
 
 	go func() {
-		for i := range 3 {
-			ch <- i
+		for range 3 {
+			v := <-ch
+			fmt.Println("v =", v)
 		}
-		close(ch)
 	}()
 
-	for v := range ch {
-		fmt.Println("v = ", v)
-	}
+	ch <- 1
+	ch <- 2
+	ch <- 3
 }
