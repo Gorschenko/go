@@ -19,19 +19,11 @@ func randomWait() int {
 }
 
 func main() {
-	ch := make(chan int)
 	totalWorkSeconds := 0
 	start := time.Now()
 
 	for range 100 {
-		go func() {
-			seconds := randomWait()
-			ch <- seconds
-		}()
-	}
-
-	for range 100 {
-		totalWorkSeconds += <-ch
+		randomWait()
 	}
 
 	mainSeconds := time.Since(start)
