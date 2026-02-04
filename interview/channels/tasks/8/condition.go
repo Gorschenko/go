@@ -1,0 +1,35 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+/*
+	Что будет выведено в двух случаях и почему?
+*/
+
+func worker() <-chan int {
+	ch := make(chan int)
+
+	go func() {
+		time.Sleep(1 * time.Second)
+		close(ch)
+	}()
+
+	return ch
+}
+
+func main() {
+	start := time.Now()
+	_, _ = worker(), worker()
+
+	fmt.Println(time.Since(start))
+}
+
+func main() {
+	start := time.Now()
+	_, _ = <-worker(), <-worker()
+
+	fmt.Println(time.Since(start))
+}

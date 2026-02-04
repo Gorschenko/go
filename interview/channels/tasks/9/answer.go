@@ -13,7 +13,7 @@ func main() {
 
 	go func() {
 		for i := 0; i < 100; i++ {
-			ch <- 1
+			ch <- i
 		}
 		close(ch)
 	}()
