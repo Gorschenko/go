@@ -9,8 +9,7 @@ import (
 )
 
 /*
-	Написать predicatableFunc, которая будет работать не более 5 сек.
-	Использовать контекст.
+	Написать predicatableFunc, которая будет работать не более 5 сек
 */
 
 func unpredictableFunc() int {
