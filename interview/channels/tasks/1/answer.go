@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"sync"
-	"time"
 )
 
 /*
@@ -17,14 +16,14 @@ func writer() <-chan int {
 	wg.Add(2)
 	go func() {
 		defer wg.Done()
-		for i := range 5 {
+		for i := range 10 {
 			ch <- i + 1
 		}
 	}()
 
 	go func() {
 		defer wg.Done()
-		for i := range 5 {
+		for i := range 10 {
 			ch <- i + 11
 		}
 	}()
@@ -40,12 +39,7 @@ func writer() <-chan int {
 func main() {
 	ch := writer()
 
-	for {
-		val, ok := <-ch
-		if !ok {
-			break
-		}
-		fmt.Println("v=", val)
+	for v := range ch {
+		fmt.Println("v=", v)
 	}
-	time.Sleep(1 * time.Second)
 }

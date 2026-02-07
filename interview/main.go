@@ -1,49 +1,38 @@
 package main
 
 import (
-	"context"
-	"errors"
 	"fmt"
-	"math/rand"
-	"time"
+	"sync"
 )
 
 /*
-	Написать predicatableFunc, которая будет работать не более 5 сек.
-	Использовать контекст.
+	Произвести запись из 1 горутины, а прочитать из 2
 */
 
-func unpredictableFunc() int {
-	n := rand.Intn(10)
-	time.Sleep(time.Duration(n) * time.Second)
-	return n
-}
-
-func predictableFunc(ctx context.Context) (int, error) {
+func main() {
 	ch := make(chan int)
-	var result int
+	wg := &sync.WaitGroup{}
 
-	var cancel context.CancelFunc
-	if _, ok := ctx.Deadline(); !ok {
-		ctx, cancel = context.WithTimeout(ctx, 5*time.Second)
-		defer cancel()
-	}
-
+	wg.Add(1)
 	go func() {
-		result = unpredictableFunc()
-		close(ch)
+		defer wg.Done()
+		for v := range ch {
+			fmt.Println("value = ", v)
+		}
 	}()
 
-	select {
-	case <-ch:
-		return result, nil
-	case <-ctx.Done():
-		return 0, errors.New("Timeout")
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for v := range ch {
+			fmt.Println("value = ", v)
+		}
+	}()
+
+	for i := range 10 {
+		ch <- i + 1
 	}
+	close(ch)
 
-}
-
-func main() {
-	result, _ := predictableFunc(context.Background())
-	fmt.Println("result = ", result)
+	wg.Wait()
 }
