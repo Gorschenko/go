@@ -6,33 +6,21 @@ import (
 )
 
 /*
-	Произвести запись из 1 горутины, а прочитать из 2
+	Как исправить? Предложить 2 способа
 */
 
 func main() {
-	ch := make(chan int)
+	money := 0
 	wg := &sync.WaitGroup{}
 
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		for v := range ch {
-			fmt.Println("value = ", v)
-		}
-	}()
-
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		for v := range ch {
-			fmt.Println("value = ", v)
-		}
-	}()
-
-	for i := range 10 {
-		ch <- i + 1
+	wg.Add(1000)
+	for range 1000 {
+		go func() {
+			defer wg.Done()
+			money++
+		}()
 	}
-	close(ch)
 
 	wg.Wait()
+	fmt.Println(money)
 }
