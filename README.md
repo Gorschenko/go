@@ -1,4 +1,4 @@
-1. Start infrastructure:
+1. Запустить инфраструктуру:
 
 ```
 docker compose -f ./docker-compose.yml up -d

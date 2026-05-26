@@ -2,25 +2,46 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"sync"
+	"time"
 )
 
 /*
-	Как исправить? Предложить 2 способа
+	Функция main должна отработать за 5 сек, а randomWait 100 раз.
+	2 способа
 */
 
-func main() {
-	money := 0
-	wg := &sync.WaitGroup{}
+func randomWait() int {
+	workSeconds := rand.Intn(5 + 1)
+	time.Sleep(time.Duration(workSeconds) * time.Second)
 
-	wg.Add(1000)
-	for range 1000 {
+	return workSeconds
+}
+
+func main() {
+	totalWorkSeconds := 0
+	start := time.Now()
+
+	wg := &sync.WaitGroup{}
+	mx := &sync.Mutex{}
+
+	for range 100 {
+		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			money++
+
+			seconds := randomWait()
+
+			mx.Lock()
+			totalWorkSeconds += seconds
+			mx.Unlock()
 		}()
 	}
 
 	wg.Wait()
-	fmt.Println(money)
+
+	mainSeconds := time.Since(start)
+	fmt.Println("main: ", mainSeconds)
+	fmt.Println("total: ", totalWorkSeconds)
 }
