@@ -29,6 +29,10 @@ services:
     restart: always
     networks:
       - go
+  redisinsight:
+    image: oblakstudio/redisinsight:latest
+    ports:
+      - 5540:5540
   mosquitto:
     image: eclipse-mosquitto:latest
     ports:
