@@ -13,11 +13,14 @@ services:
     restart: always
     networks:
       - go
-  adminer:
-    image: adminer:latest
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:latest
     ports:
-      - 8080:8080
-    restart: always
+      - 8978:8978
+    volumes:
+      - ../docker-volumes/cloudbeaver_workspace:/opt/cloudbeaver/workspace
+      - ../docker-volumes/cloudbeaver_drivers:/opt/cloudbeaver/drivers
+    restart: restart
     networks:
       - go
   redis:
